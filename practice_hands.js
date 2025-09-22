@@ -48,7 +48,7 @@ ellipse(indexFingerTipX, indexFingerTipY, 80, 80);
   ellipse(middleFingerTipX, middleFingerTipY, 70, 70 );
   ellipse(ringFingerTipX,ringFingerTipY, 70, 70);
   ellipse(pinkyFingerTipX,pinkyFingerTipY, 60, 60);  // drawPoints(hand)
-
+Reflect()
     //fingerPuppet(indexFingerTipX, indexFingerTipY);
 
     //chameleonHandPuppet(hand)
