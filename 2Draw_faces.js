@@ -65,90 +65,23 @@ function drawInteraction(faces, hands) {
 
 
 
+let leftnose= face.keypoints[237];
+let rightnose= face.keypoints[457];
+let leftnosee= face. keypoints[206];
+let rightnosee= face. keypoints[426];
+let leftnosesa= face. keypoints[187];
+let rightnosesa= face. keypoints[411];
+let end = face. keypoints[234];
+let end2= face. keypoints[454];
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-let noseTip = face.keypoints[98];
-let noseTip2 = face.keypoints[327];
-let chin = face.keypoints[150];
-let chin2 =face.keypoints[379];
-
-let startX = noseTip.x;
-let startY = noseTip.y;
-let start10X = noseTip2.x;
-let start10Y = noseTip2.y;
-
-
-let endX = chin.x;
-let endY = chin.y;
-
-let control1X = startX-110;
-let control1Y = startY;
-
-let control2X = startX-80;
-let control2Y = startY+35;
-
-let control3X = startX+180;
-let control3Y = startY;
-
-let control4X = startX+120;
-let control4Y = startY+50;
-
-let end2X = chin2.x;
-let end2Y = chin2.y;
-
-let broww =  face.keypoints[107];
-let broww2 = face.keypoints[336];
-let broww3 = face.keypoints[54];
-let broww5 = face.keypoints[21];
-let broww4 = face.keypoints[284];
-let broww6 = face.keypoints[251];
-
-let start1X = broww.x;
-let start1Y = broww.y;
-let start2X = broww2.x;
-let start2Y = broww2.y;
-
-
-let end1X = broww3.x;
-let end1Y = broww3.y;
-let end3X = broww5.x;
-let end3Y = broww5.y;
-let end4X = broww4.x;
-let end4Y = broww4.y;
-let end5X = broww6.x;
-let end5Y = broww6.y;
-
-
-
-// 描画
 noFill();
 stroke(0);
 strokeWeight(7);
-bezier(startX, startY, control1X, control1Y, control2X, control2Y, endX, endY);
-bezier(start10X, start10Y, control3X, control3Y, control4X, control4Y,end2X, end2Y);//ほうれい線
-ellipse(lipsCenterX, lipsCenterY, lipsWidth, lipsHeight);
-
-bezier(start1X, start1Y, start1X-20, start1Y-30, end1X+20, end1Y-30, end1X, end1Y);
-bezier(start1X, start1Y, start1X-20, start1Y-20, end1X+20, end1Y-20, end3X, end3Y);
-
-bezier(start2X, start2Y, start1X+20, start1Y+30, end1X +20, end1Y+30, end4X, end4Y);
-bezier(start2X, start2Y, start1X+20, start1Y+30, end1X +80, end1Y+20, end5X, end5Y);
+bezier(leftnose.x, leftnose.y, leftnosee.x, leftnosee.y, leftnosesa.x, leftnosesa.y, end.x, end.y);
 /*let noseTip = face.keypoints[4];
     let upperLip = face.keypoints[13];
     let leftCheek = face.keypoints[234];
