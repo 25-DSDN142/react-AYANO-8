@@ -199,10 +199,10 @@ bezier(rightear1.x, rightear1.y, rightear1.x, rightear1.y, rightear2.x, rightear
 let leftcheek = face. keypoints[50];
 let rightcheek = face. keypoints[280];
 
-fill(255, 192, 203);
+fill(255, 192, 203,150);
 noStroke();
-ellipse(leftcheek.x, leftcheek.y, 70, 40);
-ellipse(rightcheek.x, rightcheek.y, 70, 40);
+ellipse(leftcheek.x, leftcheek.y, 120, 70);
+ellipse(rightcheek.x, rightcheek.y, 120, 70);
 
 let r = max(leftEyeWidth, leftEyeHeight) * 2; // レンズの直径
 let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
@@ -216,17 +216,23 @@ let lashAnglesRight = [3*PI/4, 3*PI/4 + 0.15, 3*PI/4 - 0.15]; // 右目の角度
 
 
 noStroke();
-fill(255,255,255,150);
+fill(255,255,255,);
 ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
 ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
 
-fill(255, 225, 180,); 
+fill(0);
+ellipse(leftEyeCenterX, leftEyeCenterY, r/2.5, r/2.5);
+ellipse(rightEyeCenterX, rightEyeCenterY, r/2.5,r/2.5);
+//arc(leftEyeCenterX, leftEyeCenterY, r/3, r/3, 0, PI);
+//arc(rightEyeCenterX, rightEyeCenterY, r/3, r/3, 0, PI);
+
+fill(222,184,135); 
 arc(leftEyeCenterX, leftEyeCenterY, r, r, PI, 0);  // 上半分
 arc(rightEyeCenterX, rightEyeCenterY, r, r, PI, 0); // 上半分
 
 noFill();
 stroke(0);
-strokeWeight(15);
+strokeWeight(13);
 // レンズ
 line(leftBridgeX, bridgeY, rightBridgeX, bridgeY);
 
@@ -235,17 +241,13 @@ ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
 ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
 
 
-fill(0);
-//ellipse(leftEyeCenterX, leftEyeCenterY, r/4, r/4);
-//ellipse(rightEyeCenterX, rightEyeCenterY, r/4,r/4);
-arc(leftEyeCenterX, leftEyeCenterY, r/3, r/3, 0, PI);
-arc(rightEyeCenterX, rightEyeCenterY, r/3, r/3, 0, PI);
+
 
 
 
 
 stroke(0);//したまつげ
-strokeWeight(5);
+strokeWeight(8);
 
 for (let angle of lashAnglesLeft) {
   let lx = leftEyeCenterX + (r/2) * cos(angle);
@@ -265,7 +267,7 @@ for (let angle of lashAnglesRight) {
 
 let noseRadius = 40;
 
-fill(255, 225, 180);   // 肌色
+fill(222,184,135);   // 肌色
 noStroke();
 ellipse(noseTipX, noseTipY, noseRadius, noseRadius);
 
@@ -276,44 +278,16 @@ strokeWeight(5);
 arc(noseTipX, noseTipY, noseRadius, noseRadius, 0, 3*PI/2);
 
 
-/*let radius = 30;
-let lipda=face.keypoints[92];
-let angle = radians(188); // 弧の開始角度
-
-noFill();
-stroke(0);
-strokeWeight(6);
-
-
-
-arc(lipda.x, lipda.y, radius, radius, radians(150),radians(290));
-*/
 let lipkamo=face.keypoints[186];
 let lipkamo1=face.keypoints[185];
-let lipkamo2=face.keypoints[0];
+let lipkamo2=face.keypoints[17];
 let lipkamo3=face.keypoints[410];
 
-fill(255, 29,230);
-
 bezier(lipkamo.x, lipkamo.y, lipkamo1.x, lipkamo1.y, lipkamo2.x, lipkamo2.y, lipkamo3.x, lipkamo3.y);
 
-stroke(0);
-strokeWeight(6);
-bezier(lipkamo.x, lipkamo.y, lipkamo1.x, lipkamo1.y, lipkamo2.x, lipkamo2.y, lipkamo3.x, lipkamo3.y);
+
 
 noFill();
-
-let underlip = face.keypoints[410];
-let underlip1 = face.keypoints[199];
-let underlip2 = face.keypoints[42];
-let underlip3 = face.keypoints[186];
-
-bezier(underlip.x, underlip.y, underlip1.x, underlip1.y, underlip2.x, underlip2.y, underlip3.x, underlip3.y);
-
-
-
-
-
 let lipkamo4=face.keypoints[186];
 let lipkamo5=face.keypoints[216];
 let lipkamo6=face.keypoints[206];
@@ -323,18 +297,6 @@ bezier(lipkamo4.x, lipkamo4.y, lipkamo5.x, lipkamo5.y, lipkamo6.x, lipkamo6.y, l
 
 
 
-
-// 左口角（keypoints[57]）から右口角（keypoints[287]）に向かって線
-/*let leftLip = face.keypoints[186];
-let rightLip = face.keypoints[287];
-line(leftLip.x, leftLip.y, rightLip.x, rightLip.y);*/
-
-/*noFill();
-stroke(0);
-strokeWeight(10);
-ellipse(rightEyeCenterX, rightEyeCenterY,rightEyeWidth*2, rightEyeHeight*2);
-ellipse(leftEyeCenterX, leftEyeCenterY,leftEyeWidth*2, leftEyeHeight*2, );
-*/
 
 
 
