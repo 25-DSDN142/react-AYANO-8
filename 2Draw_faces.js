@@ -64,7 +64,7 @@ function drawInteraction(faces, hands) {
 
 
 
-
+/*
 let leftnose= face.keypoints[237];//鼻の孔
 let rightnose= face.keypoints[457];
 let leftnosee= face. keypoints[206];//唇と鼻の間
@@ -169,9 +169,62 @@ bezier(rightcheek.x, rightcheek.y, rightcheek1.x, rightcheek1.y, rightcheek2.x, 
 bezier(leftcheek3.x, leftcheek3.y, leftcheek5.x, leftcheek5.y, leftcheek6.x, leftcheek6.y, leftcheek7.x, leftcheek7.y);
 bezier(rightcheek3.x, rightcheek3.y, rightcheek5.x, rightcheek5.y, rightcheek6.x, rightcheek6.y, rightcheek7.x, rightcheek7.y);
 
+*/
+/*let r = max(leftEyeWidth, leftEyeHeight) * 2; // 幅と高さの大きい方を使う
+let leftInnerX = leftEyeCenterX + r/2-150;
+let rightInnerX = rightEyeCenterX - r/2+150;
+let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
+
+//let leftear= face.keypoints[124];
+//let rightear= face.keypoints[353];
+let leftear1= face.keypoints[156];
+let rightear1= face.keypoints[383];
+let leftear2= face.keypoints[139];
+let rightear2= face.keypoints[368];
+let leftear3= face.keypoints[162];
+let rightear3= face.keypoints[389];
 
 
 
+noFill();
+stroke(0);
+strokeWeight(10);
+ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
+ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
+line(leftInnerX, bridgeY, rightInnerX, bridgeY);
+bezier(leftear1.x, leftear1.y, leftear1.x, leftear1.y, leftear2.x, leftear2.y, leftear3.x, leftear3.y);
+bezier(rightear1.x, rightear1.y, rightear1.x, rightear1.y, rightear2.x, rightear2.y, rightear3.x, rightear3.y);
+*/
+
+
+
+let r = max(leftEyeWidth, leftEyeHeight) * 2; // レンズの直径
+let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
+let leftBridgeX = leftEyeCenterX + r/2; 
+let rightBridgeX = rightEyeCenterX - r/2; 
+
+noFill();
+stroke(0);
+strokeWeight(10);
+// レンズ
+ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
+ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
+line(leftBridgeX, bridgeY, rightBridgeX, bridgeY);
+
+fill(0);
+ellipse(leftEyeCenterX, leftEyeCenterY, r/4, r/4);
+ellipse(rightEyeCenterX, rightEyeCenterY, r/4, r/4);
+
+
+
+
+
+/*noFill();
+stroke(0);
+strokeWeight(10);
+ellipse(rightEyeCenterX, rightEyeCenterY,rightEyeWidth*2, rightEyeHeight*2);
+ellipse(leftEyeCenterX, leftEyeCenterY,leftEyeWidth*2, leftEyeHeight*2, );
+*/
 
 
 
