@@ -200,20 +200,31 @@ bezier(rightear1.x, rightear1.y, rightear1.x, rightear1.y, rightear2.x, rightear
 
 let r = max(leftEyeWidth, leftEyeHeight) * 2; // レンズの直径
 let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
-let leftBridgeX = leftEyeCenterX + r/2; 
-let rightBridgeX = rightEyeCenterX - r/2; 
+let leftBridgeX = leftEyeCenterX + r/1.5; 
+let rightBridgeX = rightEyeCenterX - r/1.5; 
+
+noStroke();
+fill(255,255,255,150);
+ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
+ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
+
 
 noFill();
 stroke(0);
-strokeWeight(10);
+strokeWeight(15);
 // レンズ
-ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
-ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
 line(leftBridgeX, bridgeY, rightBridgeX, bridgeY);
 
+strokeWeight(10);
+ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
+ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
+
+
 fill(0);
-ellipse(leftEyeCenterX, leftEyeCenterY, r/4, r/4);
-ellipse(rightEyeCenterX, rightEyeCenterY, r/4, r/4);
+//ellipse(leftEyeCenterX, leftEyeCenterY, r/4, r/4);
+//ellipse(rightEyeCenterX, rightEyeCenterY, r/4,r/4);
+arc(leftEyeCenterX, leftEyeCenterY, r/3, r/3, 0, PI);
+arc(rightEyeCenterX, rightEyeCenterY, r/3, r/3, 0, PI);
 
 
 
