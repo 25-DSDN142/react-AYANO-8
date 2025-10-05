@@ -203,11 +203,20 @@ let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
 let leftBridgeX = leftEyeCenterX + r/1.5; 
 let rightBridgeX = rightEyeCenterX - r/1.5; 
 
+
+let lashLength = 15; // まつげの長さ
+let lashAnglesLeft = [PI/4, PI/4 + 0.15, PI/4 - 0.15];   // 左目の角度
+let lashAnglesRight = [3*PI/4, 3*PI/4 + 0.15, 3*PI/4 - 0.15]; // 右目の角度
+
+
 noStroke();
 fill(255,255,255,150);
 ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
 ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
 
+fill(255, 225, 180,); 
+arc(leftEyeCenterX, leftEyeCenterY, r, r, PI, 0);  // 上半分
+arc(rightEyeCenterX, rightEyeCenterY, r, r, PI, 0); // 上半分
 
 noFill();
 stroke(0);
@@ -226,6 +235,27 @@ fill(0);
 arc(leftEyeCenterX, leftEyeCenterY, r/3, r/3, 0, PI);
 arc(rightEyeCenterX, rightEyeCenterY, r/3, r/3, 0, PI);
 
+
+
+
+stroke(0);//したまつげ
+strokeWeight(5);
+
+for (let angle of lashAnglesLeft) {
+  let lx = leftEyeCenterX + (r/2) * cos(angle);
+  let ly = leftEyeCenterY + (r/2) * sin(angle);
+  let lx2 = lx + lashLength * cos(angle);
+  let ly2 = ly + lashLength * sin(angle);
+  line(lx, ly, lx2, ly2);
+}
+
+for (let angle of lashAnglesRight) {
+  let rx = rightEyeCenterX + (r/2) * cos(angle);
+  let ry = rightEyeCenterY + (r/2) * sin(angle);
+  let rx2 = rx + lashLength * cos(angle);
+  let ry2 = ry + lashLength * sin(angle);
+  line(rx, ry, rx2, ry2);
+}
 
 
 
