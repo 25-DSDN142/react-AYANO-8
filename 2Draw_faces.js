@@ -196,7 +196,13 @@ bezier(leftear1.x, leftear1.y, leftear1.x, leftear1.y, leftear2.x, leftear2.y, l
 bezier(rightear1.x, rightear1.y, rightear1.x, rightear1.y, rightear2.x, rightear2.y, rightear3.x, rightear3.y);
 */
 
+let leftcheek = face. keypoints[50];
+let rightcheek = face. keypoints[280];
 
+fill(255, 192, 203);
+noStroke();
+ellipse(leftcheek.x, leftcheek.y, 70, 40);
+ellipse(rightcheek.x, rightcheek.y, 70, 40);
 
 let r = max(leftEyeWidth, leftEyeHeight) * 2; // レンズの直径
 let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
@@ -257,8 +263,71 @@ for (let angle of lashAnglesRight) {
   line(rx, ry, rx2, ry2);
 }
 
+let noseRadius = 40;
+
+fill(255, 225, 180);   // 肌色
+noStroke();
+ellipse(noseTipX, noseTipY, noseRadius, noseRadius);
+
+// --- 輪郭を描く ---
+noFill();
+stroke(0);
+strokeWeight(5);
+arc(noseTipX, noseTipY, noseRadius, noseRadius, 0, 3*PI/2);
 
 
+/*let radius = 30;
+let lipda=face.keypoints[92];
+let angle = radians(188); // 弧の開始角度
+
+noFill();
+stroke(0);
+strokeWeight(6);
+
+
+
+arc(lipda.x, lipda.y, radius, radius, radians(150),radians(290));
+*/
+let lipkamo=face.keypoints[186];
+let lipkamo1=face.keypoints[185];
+let lipkamo2=face.keypoints[0];
+let lipkamo3=face.keypoints[410];
+
+fill(255, 29,230);
+
+bezier(lipkamo.x, lipkamo.y, lipkamo1.x, lipkamo1.y, lipkamo2.x, lipkamo2.y, lipkamo3.x, lipkamo3.y);
+
+stroke(0);
+strokeWeight(6);
+bezier(lipkamo.x, lipkamo.y, lipkamo1.x, lipkamo1.y, lipkamo2.x, lipkamo2.y, lipkamo3.x, lipkamo3.y);
+
+noFill();
+
+let underlip = face.keypoints[410];
+let underlip1 = face.keypoints[199];
+let underlip2 = face.keypoints[42];
+let underlip3 = face.keypoints[186];
+
+bezier(underlip.x, underlip.y, underlip1.x, underlip1.y, underlip2.x, underlip2.y, underlip3.x, underlip3.y);
+
+
+
+
+
+let lipkamo4=face.keypoints[186];
+let lipkamo5=face.keypoints[216];
+let lipkamo6=face.keypoints[206];
+let lipkamo7=face.keypoints[92];
+bezier(lipkamo4.x, lipkamo4.y, lipkamo5.x, lipkamo5.y, lipkamo6.x, lipkamo6.y, lipkamo7.x, lipkamo7.y);
+
+
+
+
+
+// 左口角（keypoints[57]）から右口角（keypoints[287]）に向かって線
+/*let leftLip = face.keypoints[186];
+let rightLip = face.keypoints[287];
+line(leftLip.x, leftLip.y, rightLip.x, rightLip.y);*/
 
 /*noFill();
 stroke(0);
