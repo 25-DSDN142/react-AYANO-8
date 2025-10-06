@@ -195,22 +195,40 @@ line(leftInnerX, bridgeY, rightInnerX, bridgeY);
 bezier(leftear1.x, leftear1.y, leftear1.x, leftear1.y, leftear2.x, leftear2.y, leftear3.x, leftear3.y);
 bezier(rightear1.x, rightear1.y, rightear1.x, rightear1.y, rightear2.x, rightear2.y, rightear3.x, rightear3.y);
 */
-
+let eyeDist = dist(leftEyeCenterX, leftEyeCenterY, rightEyeCenterX, rightEyeCenterY);
 let leftcheek = face. keypoints[50];
 let rightcheek = face. keypoints[280];
 
-fill(255, 192, 203,150);
+
+let cheekW = map(eyeDist, 40, 200, 40, 140);  // 幅
+let cheekH = map(eyeDist, 40, 200, 25, 90);   // 高さ
+
+//let lashLength = map(eyeDist, 40, 200, 5, 25);
+//let noseRadius = map(eyeDist, 40, 200, 10, 60);
+let lensStrokeW = map(eyeDist, 40, 200, 6, 18);   // メガネのふち
+let eyeStrokeW  = map(eyeDist, 40, 200, 4, 12);   // 目の縁
+let lashStrokeW = map(eyeDist, 40, 200, 3, 10);   // まつげ
+let noseStrokeW = map(eyeDist, 40, 200, 2, 6);    // 鼻の線
+
+// 頬
+fill(255, 192, 203, 150);
+noStroke();
+ellipse(leftcheek.x, leftcheek.y, cheekW, cheekH);
+ellipse(rightcheek.x, rightcheek.y, cheekW, cheekH);
+
+/*fill(255, 192, 203,150);
 noStroke();
 ellipse(leftcheek.x, leftcheek.y, 120, 70);
-ellipse(rightcheek.x, rightcheek.y, 120, 70);
+ellipse(rightcheek.x, rightcheek.y, 120, 70);*/
 
 let r = max(leftEyeWidth, leftEyeHeight) * 2; // レンズの直径
-let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
-let leftBridgeX = leftEyeCenterX + r/1.5; 
-let rightBridgeX = rightEyeCenterX - r/1.5; 
+//let bridgeY = (leftEyeCenterY + rightEyeCenterY) / 2;
+//let leftBridgeX = leftEyeCenterX + r/1.5; 
+//let rightBridgeX = rightEyeCenterX - r/1.5; 
 
 
-let lashLength = 15; // まつげの長さ
+//let lashLength = 15; // まつげの長さ
+let lashLength = map(eyeDist, 40, 200, 5, 25);
 let lashAnglesLeft = [PI/4, PI/4 + 0.15, PI/4 - 0.15];   // 左目の角度
 let lashAnglesRight = [3*PI/4, 3*PI/4 + 0.15, 3*PI/4 - 0.15]; // 右目の角度
 
@@ -232,11 +250,14 @@ arc(rightEyeCenterX, rightEyeCenterY, r, r, PI, 0); // 上半分
 
 noFill();
 stroke(0);
-strokeWeight(13);
+strokeWeight(lensStrokeW);
 // レンズ
-line(leftBridgeX, bridgeY, rightBridgeX, bridgeY);
+//line(leftBridgeX, bridgeY, rightBridgeX, bridgeY);
+line(leftEyeCenterX + r/1.5, (leftEyeCenterY + rightEyeCenterY)/2,
+     rightEyeCenterX - r/1.5, (leftEyeCenterY + rightEyeCenterY)/2);
 
-strokeWeight(10);
+
+strokeWeight(eyeStrokeW);
 ellipse(leftEyeCenterX, leftEyeCenterY, r, r);
 ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
 
@@ -247,7 +268,7 @@ ellipse(rightEyeCenterX, rightEyeCenterY, r, r);
 
 
 stroke(0);//したまつげ
-strokeWeight(8);
+strokeWeight(lashStrokeW);
 
 for (let angle of lashAnglesLeft) {
   let lx = leftEyeCenterX + (r/2) * cos(angle);
@@ -265,8 +286,8 @@ for (let angle of lashAnglesRight) {
   line(rx, ry, rx2, ry2);
 }
 
-let noseRadius = 40;
-
+//let noseRadius = 40;
+let noseRadius = map(eyeDist, 40, 200, 10, 60);
 fill(222,184,135);   // 肌色
 noStroke();
 ellipse(noseTipX, noseTipY, noseRadius, noseRadius);
@@ -274,7 +295,7 @@ ellipse(noseTipX, noseTipY, noseRadius, noseRadius);
 // --- 輪郭を描く ---
 noFill();
 stroke(0);
-strokeWeight(5);
+strokeWeight(noseStrokeW);
 arc(noseTipX, noseTipY, noseRadius, noseRadius, 0, 3*PI/2);
 
 
