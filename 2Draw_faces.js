@@ -2,7 +2,7 @@
 /* load images here */
 let bgImage;
 function prepareInteraction() {
-  bgImage = loadImage('/images/hatt.png');
+  bgImage = loadImage('/images/headphone.png');
 }
 
 function drawInteraction(faces, hands) {
@@ -77,7 +77,7 @@ push();
 */
 
 
-let imagesa = face.keypoints[10];
+let imagesa = face.keypoints[9];
 
 // 顔の基準として目の間の距離を取得
 let leftEye = face.leftEye.keypoints[0]; 
@@ -85,10 +85,10 @@ let rightEye = face.rightEye.keypoints[3];
 let eyedist = dist(leftEye.x, leftEye.y, rightEye.x, rightEye.y);
 
 // 目の距離に応じて画像サイズを変える
-let imgWidth = map(eyedist, 20, 80, 50, 250);  // 目の距離 20～80 に応じて幅 300～600
-let imgHeight = map(eyedist, 20, 80, 10, 170); // 高さも同じく調整
+let imgWidth = map(eyedist, 20, 80, 50, 280);  // 目の距離 20～80 に応じて幅 300～600
+let imgHeight = map(eyedist, 20, 80, 10, 150); // 高さも同じく調整
 
-let offsetY = -40; // 上にずらす
+let offsetY = -10; // 上にずらす
 
 push();
 imageMode(CENTER);
