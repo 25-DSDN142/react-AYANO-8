@@ -1,9 +1,13 @@
 // ----=  Faces  =----
 /* load images here */
-let bgImage;
+let bgImage1, bgImage2;
+let currentImage = 0; 
 function prepareInteraction() {
-  bgImage = loadImage('/images/headphone.png');
-}
+  bgImage1 = loadImage('/images/hatt.png');
+  bgImage2 = loadImage('/images/hat.png');
+
+  }
+
 
 function drawInteraction(faces, hands) {
 
@@ -85,16 +89,17 @@ let rightEye = face.rightEye.keypoints[3];
 let eyedist = dist(leftEye.x, leftEye.y, rightEye.x, rightEye.y);
 
 // 目の距離に応じて画像サイズを変える
-let imgWidth = map(eyedist, 20, 80, 50, 280);  // 目の距離 20～80 に応じて幅 300～600
-let imgHeight = map(eyedist, 20, 80, 10, 150); // 高さも同じく調整
+let imgWidth = map(eyedist, 20, 80, 50, 250);  // 目の距離 20～80 に応じて幅 300～600
+let imgHeight = map(eyedist, 20, 80, 10, 120); // 高さも同じく調整
 
-let offsetY = -10; // 上にずらす
+let offsetY = -70; // 上にずらす
+
+let currentImg = (currentImage === 0) ? bgImage1 : bgImage2;
 
 push();
 imageMode(CENTER);
-image(bgImage, imagesa.x, imagesa.y + offsetY, imgWidth, imgHeight);
+image(currentImg, imagesa.x, imagesa.y + offsetY, imgWidth, imgHeight);
 pop();
-
 
 
 
@@ -223,7 +228,20 @@ let lipkamo7=face.keypoints[92];
 bezier(lipkamo4.x, lipkamo4.y, lipkamo5.x, lipkamo5.y, lipkamo6.x, lipkamo6.y, lipkamo7.x, lipkamo7.y);
 
 
+if (hands.length > 0) {
+  let hand = hands[0]; // 1つ目の手
+  let thumbTip = hand.keypoints[4];
+  let indexTip = hand.keypoints[8];
 
+
+  let pinchDist = dist(thumbTip.x, thumbTip.y, indexTip.x, indexTip.y);
+
+  if (pinchDist < 30) {
+    currentImage = 1; // 画像を切り替える
+  } else {
+    currentImage = 0;
+  }
+}
 
 
 
