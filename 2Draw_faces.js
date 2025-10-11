@@ -2,9 +2,12 @@
 /* load images here */
 let bgImage1, bgImage2;
 let currentImage = 0; 
+let cheekColor;
+
 function prepareInteraction() {
   bgImage1 = loadImage('/images/hatt.png');
   bgImage2 = loadImage('/images/hat.png');
+  cheekColor = color(255, 192, 203, 150);
 
   }
 
@@ -19,6 +22,33 @@ function drawInteraction(faces, hands) {
       drawPoints(face)
     }
 
+
+
+
+
+
+
+
+  for (let i = 0; i < hands.length; i++) {
+    let hand = hands[i];
+    let gesture = detectHandGesture(hand);
+
+
+
+let whatGesture = detectHandGesture(hand)
+    if (whatGesture == "Thumbs Up") {
+      cheekColor = color(255,192, 203, 150);
+    }
+    if (whatGesture == "Open Palm") {
+      cheekColor = color(100,200,255, 150);
+    }
+if (showKeypoints) {
+      drawPoints(hand);
+      drawConnections(hand);
+    }
+  }
+
+  
     /*
     Once this program has a face, it knows some things about it.
     This includes how to draw a box around the face, and an oval. 
@@ -66,6 +96,10 @@ function drawInteraction(faces, hands) {
 
     let noseTipX = face.keypoints[4].x;
     let noseTipY = face.keypoints[4].y;
+
+
+
+
 
 
 
@@ -123,7 +157,7 @@ let lashStrokeW = map(eyeDist, 40, 200, 3, 10);   // まつげ
 let noseStrokeW = map(eyeDist, 40, 200, 2, 6);    // 鼻の線
 
 // 頬
-fill(255, 192, 203, 150);
+fill(cheekColor);
 noStroke();
 ellipse(leftcheek.x, leftcheek.y, cheekW, cheekH);
 ellipse(rightcheek.x, rightcheek.y, cheekW, cheekH);
@@ -233,7 +267,7 @@ if (hands.length > 0) {
   let thumbTip = hand.keypoints[4];
   let indexTip = hand.keypoints[8];
 
-
+  
   let pinchDist = dist(thumbTip.x, thumbTip.y, indexTip.x, indexTip.y);
 
   if (pinchDist < 30) {
