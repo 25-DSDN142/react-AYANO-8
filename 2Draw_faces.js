@@ -1,12 +1,14 @@
 // ----=  Faces  =----
 /* load images here */
-let bgImage1, bgImage2;
+let bgImage1, bgImage2,bgImage3,bgImage4;
 let currentImage = 0; 
 let cheekColor;
 
 function prepareInteraction() {
   bgImage1 = loadImage('/images/hatt.png');
   bgImage2 = loadImage('/images/hat.png');
+  bgImage3 = loadImage('/images/sharkk.png');
+  bgImage4 = loadImage('/images/rabbit.png');
   cheekColor = color(255, 192, 203, 150);
 
   }
@@ -91,17 +93,19 @@ if (showKeypoints) {
 
 
 
-let imagesa = face.keypoints[9];//hat
+
 
 let leftEye = face.leftEye.keypoints[0]; 
 let rightEye = face.rightEye.keypoints[3]; 
 let eyedist = dist(leftEye.x, leftEye.y, rightEye.x, rightEye.y);
 
-let imgWidth = map(eyedist, 20, 80, 50, 250);  
-let imgHeight = map(eyedist, 20, 80, 10, 120); 
+let imagesa = face.keypoints[9];//hat
+let offsetY = -70;
 
-let offsetY = -70; 
-let currentImg = (currentImage === 0) ? bgImage1 : bgImage2;
+let upperLip = face.keypoints[13]; 
+let lowerLip = face.keypoints[14]; 
+let mouthOpen = dist(upperLip.x, upperLip.y, lowerLip.x, lowerLip.y); // 距離を測る
+ 
 
 let eyeDist = dist(leftEyeCenterX, leftEyeCenterY, rightEyeCenterX, rightEyeCenterY);
 let leftcheek = face. keypoints[50];
@@ -124,11 +128,32 @@ let lashAnglesRight = [3*PI/4, 3*PI/4 + 0.15, 3*PI/4 - 0.15];
 
 let noseRadius = map(eyeDist, 40, 200, 10, 60);
 
+let currentImg;
+if (currentImage === 0) currentImg = bgImage1;
+else if (currentImage === 1) currentImg = bgImage2;
+else if (currentImage === 2) currentImg = bgImage3;
+else if (currentImage === 3) currentImg = bgImage4; 
+
 
 //image
 push();
 imageMode(CENTER);
-image(currentImg, imagesa.x, imagesa.y + offsetY, imgWidth, imgHeight);
+let drawX = faceCenterX; 
+let drawY;
+let drawW = map(eyedist, 20, 80, 130, 330);
+let drawH = map(eyedist, 20, 80, 110, 200);
+
+if (currentImage === 2) {
+  drawW *= 1.9;
+  drawH *= 3.4;
+
+let offsetHat = +90; 
+  drawY = imagesa.y + offsetHat;
+} else {
+  drawY = imagesa.y + offsetY; 
+}
+
+image(currentImg, drawX, drawY, drawW, drawH);
 pop();
 
 
@@ -211,18 +236,38 @@ bezier(lipkamo4.x, lipkamo4.y, lipkamo5.x, lipkamo5.y, lipkamo6.x, lipkamo6.y, l
 
 //change the hat color when the thumb and index finger touch
 if (hands.length > 0) {
-  let hand = hands[0]; 
+  let hand = hands[0];
   let thumbTip = hand.keypoints[4];
   let indexTip = hand.keypoints[8];
+  let fingerDist = dist(thumbTip.x, thumbTip.y, indexTip.x, indexTip.y);
 
-  let pinchDist = dist(thumbTip.x, thumbTip.y, indexTip.x, indexTip.y);
+  // cheek
+  let gesture = detectHandGesture(hand); 
+  if (gesture === "Thumbs Up") {
+    cheekColor = color(255, 192, 203, 150);
+  } else if (gesture === "Open Palm") {
+    cheekColor = color(255, 0, 255, 150);
+  }
 
-  if (pinchDist < 30) {
+  // change image
+  if (mouthOpen > 15) {
+    currentImage = 2; 
+  } else if (gesture === "Peace") {
+    currentImage = 3; 
+  } else if (fingerDist < 30) {
     currentImage = 1; 
   } else {
-    currentImage = 0;
+    currentImage = 0; 
   }
+
+  if (showKeypoints) {
+    drawPoints(hand);
+    drawConnections(hand);
+  }
+} else {
+  currentImage = (mouthOpen > 15) ? 2 : 0;
 }
+
 
  /*drawPoints(face.leftEye);
  drawPoints(face.leftEyebrow);
